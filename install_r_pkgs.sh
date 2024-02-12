@@ -14,6 +14,8 @@ if [ ! -f "$FILENAME" ]; then
     exit 1
 fi
 
+module load R
+
 # Install each package listed in the file
 while IFS= read -r package; do
     echo "Installing R package: $package"
