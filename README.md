@@ -1,15 +1,17 @@
 # Tutorial: Setting up Hoffman2
-# ===============
+===============================
 
-### 1. Introduction: Why use Hoffman2?
+Hoffman2 is a high-performance computing cluster available to UCLA researchers.
 
-Hoffman2 is a high-performance computing cluster at UCLA. It is a shared resource that is available to all UCLA researchers. It is a great resource for running computationally intensive jobs, such as simulations, data analytics, and machine learning.
+Use Hoffman2 to perform models and analyses that require more resources than your home computer can provide.
 
-For Data Scientist and Biostatisticians going into industry, many of your models and analyses will require more resources than your home computer can provide. In fact, employers perfer you run those analyses on a cluster, as it is more efficient and cost effective.
+In industry, many top employers use in-house computing clusters or cloud computing resources. Learning to use Hoffman2 will help you prepare for these environments.
 
-### 2. Getting Started: Connecting to Hoffman2.
+[TOC]
 
-a. Create an account on Hoffman2 by logging in with your UCLA account information then list a sponsor (e.g a professor) and request approval [[link](https://www.hoffman2.idre.ucla.edu/Accounts/Accounts.html#requesting-an-account)]. When your account is approved, you will need to log into the Hoffman2 website [link](https://sim.idre.ucla.edu/), retrieve your login id, and set your password.
+## Getting Started: Connecting to Hoffman2.
+
+1. Create an account on Hoffman2 by logging in with your UCLA account information then list a sponsor (e.g a professor) and request approval [[link](https://www.hoffman2.idre.ucla.edu/Accounts/Accounts.html#requesting-an-account)]. When your account is approved, you will need to log into the Hoffman2 website [link](https://sim.idre.ucla.edu/), retrieve your login id, and set your password.
 
 b. Connect to Hoffman2 using SSH. 
 
@@ -67,11 +69,21 @@ ssh -T git@github.com
 ```bash
 git clone git@github.com:taylorswrite/hoffman2-setup.git ~/github/hoffman2-setup
 cd ~/github/hoffman2-setup
-bash install_r_pkgs.sh pkgs_r
-bash install_python_pkgs.sh pkgs_python
-bash install_julia_pkgs.sh pkgs_julia
-```
 
+module load R
+bash install_r_pkgs.sh pkgs_r
+
+module load python
+bash install_python_pkgs.sh pkgs_python
+
+module load julia
+bash install_julia_pkgs.sh pkgs_julia
+```bash
+module load apptainer
+
+#Run rstudio
+apptainer run -B $SCRATCH/rstudiotmp/var/lib:/var/lib/rstudio-server -B $SCRATCH/rstudiotmp/var/run:/var/run/rstudio-server -B $SCRATCH/rstudiotmp/tmp:/tmp $H2_CONTAINER_LOC/h2-rstudio_4.1.0.sif
+```
 
 
 
